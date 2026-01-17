@@ -100,11 +100,11 @@ export default function PaymentsPage() {
                     <div className="text-sm text-gray-600 space-y-1">
                       <p>Amount: {formatCurrency(payment.amount)}</p>
                       {payment.status === "pending" ? (
-                        <p>Due Date: {formatDate(payment.dueDate)}</p>
+                        payment.dueDate && <p>Due Date: {formatDate(payment.dueDate)}</p>
                       ) : (
                         <>
-                          <p>Paid Date: {formatDate(payment.paidDate!)}</p>
-                          <p>Reference ID: {payment.referenceId}</p>
+                          {payment.paidDate && <p>Paid Date: {formatDate(payment.paidDate)}</p>}
+                          {payment.referenceId && <p>Reference ID: {payment.referenceId}</p>}
                         </>
                       )}
                     </div>
