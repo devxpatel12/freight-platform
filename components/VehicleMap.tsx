@@ -153,45 +153,24 @@ export default function VehicleMap({
       <div className="relative w-full h-96 rounded-lg overflow-hidden border-2 border-primary-300 shadow-lg bg-gray-100">
         {GOOGLE_MAPS_API_KEY ? (
           <>
-            {/* Static Map with Vehicle Location Marker */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={staticMapUrl}
-              alt="Vehicle Location Map"
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                // Fallback if static map fails
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                const fallback = target.nextElementSibling as HTMLElement;
-                if (fallback) fallback.style.display = 'flex';
-              }}
+            {/* Interactive Google Maps Embed - Shows exact vehicle location */}
+            <iframe
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=${latitude},${longitude}&zoom=14`}
+              className="w-full h-full"
             />
-            {/* Fallback if image fails to load */}
-            <div className="absolute inset-0 hidden items-center justify-center bg-gray-100" style={{ display: 'none' }}>
-              <div className="text-center p-6">
-                <Navigation className="h-12 w-12 text-primary-600 mx-auto mb-4" />
-                <p className="text-gray-900 font-semibold mb-2">Live Vehicle Location</p>
-                <p className="text-sm text-gray-600 mb-1">
-                  Coordinates: {latitude.toFixed(6)}, {longitude.toFixed(6)}
-                </p>
-                <a
-                  href={googleMapsLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-semibold mt-4"
-                >
-                  Open in Google Maps
-                </a>
-              </div>
-            </div>
             
             {/* Vehicle Location Indicator Overlay */}
-            <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 border-2 border-primary-500">
+            <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 border-2 border-primary-500 z-10">
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
                 <div>
-                  <p className="text-xs text-gray-600">Vehicle</p>
+                  <p className="text-xs text-gray-600">Vehicle Location</p>
                   <p className="text-xs font-mono font-semibold text-gray-900">
                     {latitude.toFixed(4)}, {longitude.toFixed(4)}
                   </p>
@@ -200,20 +179,20 @@ export default function VehicleMap({
             </div>
             
             {/* Legend */}
-            <div className="absolute bottom-4 left-4 bg-white bg-opacity-95 rounded-lg shadow-lg p-3 border border-gray-200">
+            <div className="absolute bottom-4 left-4 bg-white bg-opacity-95 rounded-lg shadow-lg p-3 border border-gray-200 z-10">
               <div className="space-y-1 text-xs">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span className="text-gray-700">Source</span>
+                  <span className="text-gray-700">Source: {source || 'N/A'}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                  <span className="text-gray-700 font-semibold">Vehicle (Current)</span>
+                  <span className="text-gray-700 font-semibold">Vehicle (Current Location)</span>
                 </div>
                 {destLat && destLng && (
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                    <span className="text-gray-700">Destination</span>
+                    <span className="text-gray-700">Destination: {destination || 'N/A'}</span>
                   </div>
                 )}
               </div>
