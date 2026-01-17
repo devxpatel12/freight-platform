@@ -154,6 +154,7 @@ export default function VehicleMap({
         {GOOGLE_MAPS_API_KEY ? (
           <>
             {/* Static Map with Vehicle Location Marker */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={staticMapUrl}
               alt="Vehicle Location Map"
@@ -167,7 +168,7 @@ export default function VehicleMap({
               }}
             />
             {/* Fallback if image fails to load */}
-            <div className="hidden absolute inset-0 flex items-center justify-center bg-gray-100">
+            <div className="absolute inset-0 hidden items-center justify-center bg-gray-100" style={{ display: 'none' }}>
               <div className="text-center p-6">
                 <Navigation className="h-12 w-12 text-primary-600 mx-auto mb-4" />
                 <p className="text-gray-900 font-semibold mb-2">Live Vehicle Location</p>
@@ -255,7 +256,7 @@ export default function VehicleMap({
           <div className="flex-1">
             <p className="text-sm font-medium text-primary-900">Real-time Tracking</p>
             <p className="text-xs text-primary-700 mt-1">
-              Location is updated every few minutes. Click "Open in Google Maps" for detailed navigation.
+              Location is updated every few minutes. Click &quot;Open in Google Maps&quot; for detailed navigation.
             </p>
           </div>
         </div>
