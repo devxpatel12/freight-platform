@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Truck, Package, Settings } from "lucide-react";
+import { Truck, Package, Settings, Building2 } from "lucide-react";
 
 export default function Home() {
   return (
@@ -36,12 +36,15 @@ export default function Home() {
                 Asian India Trans Logistics
               </h1>
             </div>
-            <div className="hidden md:flex space-x-6">
+            <div className="hidden md:flex space-x-6 items-center">
               <Link href="/" className="text-gray-700 hover:text-primary-600 font-medium">Home</Link>
               <Link href="#" className="text-gray-700 hover:text-primary-600 font-medium">About Us</Link>
               <Link href="#" className="text-gray-700 hover:text-primary-600 font-medium">Services</Link>
               <Link href="#" className="text-gray-700 hover:text-primary-600 font-medium">Global Coverage</Link>
               <Link href="#" className="text-gray-700 hover:text-primary-600 font-medium">Contacts</Link>
+              <Link href="/register" className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 font-medium transition-colors">
+                Register
+              </Link>
             </div>
             <button className="md:hidden bg-primary-600 text-white p-2 rounded">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,19 +69,19 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="#portals"
+                href="/register"
                 className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-flex items-center justify-center"
               >
-                EXPLORE MORE
+                REGISTER NOW
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
               <Link
-                href="#contact"
+                href="#portals"
                 className="bg-white hover:bg-gray-100 text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-flex items-center justify-center"
               >
-                CONTACT US
+                EXPLORE MORE
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -100,12 +103,18 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <PortalCard
-              title="Shipper/Broker"
+              title="Shipper"
               description="Post loads, track shipments, manage payments"
               href="/shipper"
               icon={<Package className="h-8 w-8" />}
+            />
+            <PortalCard
+              title="Broker"
+              description="Post loads on behalf of shippers, earn commissions"
+              href="/broker"
+              icon={<Building2 className="h-8 w-8" />}
             />
             <PortalCard
               title="Fleet Owner"
