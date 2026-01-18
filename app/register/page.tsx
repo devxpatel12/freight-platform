@@ -1,13 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Package, Truck, User, Building2, ArrowRight } from "lucide-react";
-import Button from "@/components/ui/Button";
 
 export default function RegisterPage() {
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
-
   const roles = [
     {
       id: "shipper",
@@ -43,15 +39,6 @@ export default function RegisterPage() {
     },
   ];
 
-  const handleRoleSelect = (roleId: string) => {
-    setSelectedRole(roleId);
-  };
-
-  const handleContinue = () => {
-    if (selectedRole) {
-      window.location.href = `/register/${selectedRole}`;
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -79,16 +66,12 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {roles.map((role) => (
-            <div
+            <Link
               key={role.id}
-              onClick={() => handleRoleSelect(role.id)}
-              className={`bg-white rounded-lg shadow-lg p-6 cursor-pointer transition-all border-2 ${
-                selectedRole === role.id
-                  ? "border-primary-600 shadow-xl scale-105"
-                  : "border-gray-200 hover:border-primary-300 hover:shadow-xl"
-              }`}
+              href={`/register/${role.id}`}
+              className="bg-white rounded-lg shadow-lg p-6 cursor-pointer transition-all border-2 border-gray-200 hover:border-primary-600 hover:shadow-xl transform hover:scale-105 block"
             >
               <div className="flex items-start space-x-4">
                 <div className={`${role.color} text-white p-4 rounded-lg`}>
@@ -109,27 +92,12 @@ export default function RegisterPage() {
                     </ul>
                   </div>
                 </div>
-                {selectedRole === role.id && (
-                  <div className="text-primary-600">
-                    <ArrowRight className="h-6 w-6" />
-                  </div>
-                )}
+                <div className="text-primary-600">
+                  <ArrowRight className="h-6 w-6" />
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
-        </div>
-
-        <div className="flex justify-center space-x-4">
-          <Link href="/">
-            <Button variant="outline">Cancel</Button>
-          </Link>
-          <Button
-            onClick={handleContinue}
-            disabled={!selectedRole}
-            className="min-w-[200px] flex items-center justify-center"
-          >
-            Continue Registration <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
         </div>
 
         <div className="mt-8 text-center">
